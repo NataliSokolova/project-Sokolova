@@ -1,0 +1,17 @@
+{
+  "models": [
+    {
+      "title": "Chat Model",
+      "provider": "ollama",
+      "model": "codellama:7b-code"
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "Autocomplete",
+    "provider": "ollama",
+    "model": "codellama:7b-code"
+  },
+  "tabAutocompleteOptions": {
+    "debounceDelay": 200
+  }
+}
