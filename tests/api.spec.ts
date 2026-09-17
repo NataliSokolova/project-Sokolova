@@ -37,7 +37,7 @@ async function createTempUserAndArticle({ request }) {
     data: articlePayload,
   });
 
-  console.log('📝 Временная статья:', await createResponse.text());
+  console.log('Временная статья:', await createResponse.text());
 
   
   expect(createResponse.status()).toBe(201);
@@ -51,7 +51,7 @@ async function createTempUserAndArticle({ request }) {
 
 
 test('Можно зарегистрировать нового пользователя', async ({ request }) => {
-  console.log('🚀 Запуск теста #1');
+  console.log('Запуск теста #1');
 
   const timestamp = Date.now(); 
 
@@ -69,7 +69,7 @@ test('Можно зарегистрировать нового пользова�
     data: userData,
   });
 
-  console.log('📝 Ответ регистрации:', await response.text()); 
+  console.log('Ответ регистрации:', await response.text()); 
 
   expect(response.ok()).toBe(true); 
   expect(response.status()).toBe(201); 
@@ -81,7 +81,7 @@ test('Можно зарегистрировать нового пользова�
 
 
 test('Автор может создать новую статью', async ({ request }) => {
-  console.log('🚀 Запуск теста #2');
+  console.log('Запуск теста #2');
 
   let token;
   {
@@ -117,7 +117,7 @@ test('Автор может создать новую статью', async ({ re
     data: articlePayload,
   });
 
-  console.log('📝 Ответ создания:', await createResponse.text());
+  console.log('Ответ создания:', await createResponse.text());
 
   
   expect(createResponse.ok()).toBe(true);
@@ -129,11 +129,11 @@ test('Автор может создать новую статью', async ({ re
 
 
 test('Должен вернуть список всех статей', async ({ request }) => {
-  console.log('🚀 Запуск теста #3');
+  console.log('Запуск теста #3');
 
   const response = await request.get('/api/articles'); 
 
-  console.log('📝 Список статей:', await response.text());
+  console.log('Список статей:', await response.text());
 
   
   expect(response.ok()).toBe(true);
@@ -147,12 +147,12 @@ test('Должен вернуть список всех статей', async ({ 
 
 
 test('Поиск должен возвращать результаты', async ({ request }) => {
-  console.log('🚀 Запуск теста #4');
+  console.log('Запуск теста #4');
 
 
   const response = await request.get('/api/articles?tag=testing'); 
 
-  console.log('📝 Результаты поиска:', await response.text());
+  console.log('Результаты поиска:', await response.text());
 
   expect(response.ok()).toBe(true);
   expect(response.status()).toBe(200);
@@ -178,7 +178,7 @@ test('Поиск должен возвращать результаты', async 
 
 
 test('Автор может видеть свои любимые статьи', async ({ request }) => {
-  console.log('🚀 Запуск теста #6');
+  console.log('Запуск теста #6');
 
  
   const { token } = await createTempUserAndArticle({ request });
@@ -188,7 +188,7 @@ test('Автор может видеть свои любимые статьи', 
     headers: { Authorization: `Token ${token}` }
   });
 
-  console.log('📝 Мой любимый контент:', await feedResponse.text());
+  console.log('Мой любимый контент:', await feedResponse.text());
 
   
   expect(feedResponse.ok()).toBe(true);
@@ -203,7 +203,7 @@ test('Автор может видеть свои любимые статьи', 
 
 
 test('Автор может обновить свою статью', async ({ request }) => {
-  console.log('🚀 Запуск теста #7');
+  console.log('Запуск теста #7');
 
   
   const { token, mySlug } = await createTempUserAndArticle({ request });
@@ -218,7 +218,7 @@ test('Автор может обновить свою статью', async ({ re
     }
   });
 
-  console.log('📝 Обновление:', await updateResponse.text());
+  console.log('Обновление:', await updateResponse.text());
 
   expect(updateResponse.ok()).toBe(true);
   expect(updateResponse.status()).toBe(200);
@@ -229,17 +229,16 @@ test('Автор может обновить свою статью', async ({ re
 
 
 test('Автор может удалить свою статью', async ({ request }) => {
-  console.log('🚀 Запуск теста #8');
+  console.log('Запуск теста #8');
 
   
   const { token, mySlug } = await createTempUserAndArticle({ request });
 
-  // DELETE-запрос на удаление статьи.
   const deleteResponse = await request.delete(`/api/articles/${mySlug}`, {
     headers: { Authorization: `Token ${token}` }
   });
 
-  console.log('📝 Удаление:');
+  console.log('Удаление:');
 
   
   expect(deleteResponse.ok()).toBe(true);
@@ -248,12 +247,12 @@ test('Автор может удалить свою статью', async ({ requ
 
 
 test('Пользователь может увидеть статьи с тэгом "testing"', async ({ request }) => {
-  console.log('🚀 Запуск теста #9');
+  console.log('Запуск теста #9');
 
   
   const response = await request.get('/api/articles?tag=testing'); 
 
-  console.log('📝 Статьи:', await response.text());
+  console.log('Статьи:', await response.text());
 
   expect(response.status()).toBe(200);
 
@@ -277,12 +276,12 @@ test('Пользователь может увидеть статьи с тэг�
 
 
 test('Пользователь может получить список популярных тегов', async ({ request }) => {
-  console.log('🚀 Запуск теста #10');
+  console.log('Запуск теста #10');
 
 
   const response = await request.get('/api/tags'); 
 
-  console.log('📝 Список тегов:', await response.text());
+  console.log('Список тегов:', await response.text());
 
   expect(response.status()).toBe(200);
 
